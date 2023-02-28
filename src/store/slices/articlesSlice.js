@@ -19,7 +19,6 @@ export const fetchArticles = createAsyncThunk('articles/fetchArticles', async (p
 export const fetchArticle = createAsyncThunk('articles/fetchArticle', async (slug) => {
   const res = await fetch(`https://blog.kata.academy/api/articles/${slug}`);
   const data = await res.json();
-  console.log(data);
   return data;
 });
 
@@ -46,13 +45,11 @@ export const articlesSlice = createSlice({
     [fetchArticle.fulfilled]: (state, action) => {
       state.articleStatus = 'resolved';
       state.currentArticle = action.payload;
-      console.log(!!action.payload.errors);
       if (action.payload.errors) {
         state.articleError = true;
       }
     },
-    [fetchArticle.rejected]: (state, action) => {
-      console.log('rejected', state, action);
+    [fetchArticle.rejected]: (state) => {
       state.articleError = true;
     },
   },
