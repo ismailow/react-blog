@@ -1,0 +1,103 @@
+.wrapper {
+  min-height: 100%;
+  padding: 25px 0;
+}
+
+.article {
+  width: 941px;
+  background-color: #fff;
+  margin: 0 auto;
+  padding: 15px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.topRow {
+  display: flex;
+  gap: 13px;
+}
+
+.title {
+  color: #1890FF;
+  font-weight: 400;
+  line-height: 28px;
+  font-size: 20px;
+  margin: 0;
+}
+
+.likeBtn {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.authorBlock {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  p {
+    margin: 0;
+  }
+}
+
+.name {
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.date {
+  font-size: 12px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+} 
+
+.description {
+  max-width: 682px;
+  font-size: 12px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.body {
+  margin-top: 25px;
+  h2 {
+    font-size: 21px;
+    font-weight: 400;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 400;
+  }
+  p {
+    font-size: 16px;
+  }
+  li {
+    font-size: 14px;
+  }
+}

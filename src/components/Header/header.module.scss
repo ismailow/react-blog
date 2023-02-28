@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  padding: 10px 22px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+}
+
+.title {
+  font-size: 18px;
+  line-height: 28px;
+  text-decoration: none;
+  color: #000
+}
+
+.logBlock {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logIn {
+  font-size: 18px;
+  color: #000;
+  text-decoration: none;
+}
+
+.signUp {
+  font-size: 18px;
+  color: #52C41A;
+  text-decoration: none;
+  line-height: 28px;
+  border: 1px solid #52C41A;
+  padding: 6px 18px 10px;
+  border-radius: 5px;
+}
