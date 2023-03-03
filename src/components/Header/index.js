@@ -1,8 +1,13 @@
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import LogBlock from '../logBlock';
+import AccountBlock from '../accountBlock';
 
 import styles from './header.module.scss';
 
 function Header() {
+  const isLogged = useSelector((state) => state.userReducer.isLoggedIn);
   return (
     <header className={styles.header}>
       <Link
@@ -11,20 +16,7 @@ function Header() {
       >
         Realworld Blog
       </Link>
-      <div className={styles.logBlock}>
-        <a
-          className={styles.logIn}
-          href="#"
-        >
-          Sign In
-        </a>
-        <a
-          className={styles.signUp}
-          href="#"
-        >
-          Sign Up
-        </a>
-      </div>
+      {isLogged ? <AccountBlock /> : <LogBlock />}
     </header>
   );
 }

@@ -5,6 +5,9 @@ import store from '../../store/store';
 import Header from '../Header';
 import ArticlesPage from '../../pages/articlesPage';
 import ArticlePage from '../../pages/articlePage';
+import SignInPage from '../../pages/signInPage';
+import SignUpPage from '../../pages/signUpPage';
+import ProfilePage from '../../pages/profilePage';
 
 import styles from './app.module.scss';
 import 'normalize.css';
@@ -27,6 +30,18 @@ function App() {
             <Route
               path="/article/:slug"
               element={<ArticlePage />}
+            />
+            <Route
+              path="/sign-in"
+              element={<SignInPage />}
+            />
+            <Route
+              path="/sign-up"
+              element={<SignUpPage />}
+            />
+            <Route
+              path="/profile"
+              element={<ProfilePage />}
             />
           </Routes>
         </div>

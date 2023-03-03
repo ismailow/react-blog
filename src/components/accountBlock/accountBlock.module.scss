@@ -1,0 +1,47 @@
+.accountBlock {
+  display: flex;
+  gap: 26px;
+  a {
+    text-decoration: none;
+  }
+}
+
+.articleBtn {
+  background-color: transparent;
+  border: 1px solid #52C41A;
+  border-radius: 5px;
+  color: #52C41A;
+  font-size: 14px;
+  line-height: 22px;
+  padding: 5px 10px;
+  align-self: center;
+  cursor: pointer;
+}
+
+.userBlock {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  text-decoration: none;
+}
+
+.userName {
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+}
+
+.logOutBtn {
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  border-radius: 5px;
+  font-size: 18px;
+  line-height: 28px;
+  padding: 8px 18px;
+  cursor: pointer;
+}
