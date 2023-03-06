@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 
 import formatDate from '../../helpers/dateFormatter';
 import Tag from '../Tag';
+import Like from '../like';
 
 import styles from './article.module.scss';
 
@@ -14,13 +15,11 @@ function Article({ title, description, date, likes, isLiked, author, avatar, tag
             <Link to={`/article/${slug}`}>
               <h2 className={styles.title}>{title || 'Title'}</h2>
             </Link>
-            <button className={styles.likeBtn}>
-              <img
-                src={`/img/${isLiked ? 'liked.svg' : 'unliked.svg'}`}
-                alt="like"
-              />
-              {likes}
-            </button>
+            <Like
+              isLiked={isLiked}
+              likes={likes}
+              slug={slug}
+            />
           </div>
           <div className={styles.tags}>{tags.map((tag) => (tag === '' ? null : <Tag text={tag} />))}</div>
         </div>

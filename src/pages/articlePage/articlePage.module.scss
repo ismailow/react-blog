@@ -84,6 +84,35 @@
   color: rgba(0, 0, 0, 0.75);
 }
 
+.subheader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.controlBlock {
+  align-self: end;
+  display: flex;
+  gap: 12px;
+  button {
+    border-radius: 5px;
+    background-color: transparent;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 6px 16px;
+    cursor: pointer;
+  }
+}
+
+.deleteBtn {
+  color: #F5222D;
+  border: 1px solid #F5222D;
+}
+
+.editBtn {
+  color: #52C41A;
+  border: 1px solid #52C41A;
+}
+
 .body {
   margin-top: 25px;
   h2 {

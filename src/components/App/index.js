@@ -8,6 +8,8 @@ import ArticlePage from '../../pages/articlePage';
 import SignInPage from '../../pages/signInPage';
 import SignUpPage from '../../pages/signUpPage';
 import ProfilePage from '../../pages/profilePage';
+import NewArticlePage from '../../pages/newArticlePage';
+import EditingPage from '../../pages/editingPage';
 
 import styles from './app.module.scss';
 import 'normalize.css';
@@ -42,6 +44,14 @@ function App() {
             <Route
               path="/profile"
               element={<ProfilePage />}
+            />
+            <Route
+              path="new-article"
+              element={<NewArticlePage />}
+            />
+            <Route
+              path="/articles/:slug/edit"
+              element={<EditingPage />}
             />
           </Routes>
         </div>

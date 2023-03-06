@@ -4,7 +4,6 @@ import { Spin, Pagination } from 'antd';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { fetchArticles } from '../../store/slices/articlesSlice';
-import { logIn } from '../../store/slices/userSlice';
 import Article from '../../components/article';
 import ErrorIndicator from '../../components/ErrorIndicator';
 
@@ -16,7 +15,7 @@ function ArticlesPage() {
   const status = useSelector((state) => state.articlesReducer.status);
   const error = useSelector((state) => state.articlesReducer.error);
   const articlesCount = useSelector((state) => state.articlesReducer.articles.articlesCount);
-  const token = localStorage.getItem('token');
+  const isLogged = useSelector((state) => state.userReducer.isLoggedIn);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,36 +23,8 @@ function ArticlesPage() {
   useEffect(() => {
     const fetchParameter = params.page === 1 ? 0 : params.page * 20 - 20;
     dispatch(fetchArticles(fetchParameter));
-  }, [dispatch, params]);
-
-  // useEffect(() => {
-  //   if (localStorage.token) {
-  //     const request = fetch('https://blog.kata.academy/api/users', {
-  //       method: 'GET',
-  //       headers: {
-  //           Authorization: `Token ${token}`,
-  //           'Content-Type': 'application/json',
-  //         },
-  //       }
-  //     });
-  //   }
-  // })
-  useEffect(() => {
-    const log = async () => {
-      if (localStorage.token) {
-        const request = await fetch('https://blog.kata.academy/api/user', {
-          method: 'GET',
-          headers: {
-            Authorization: `Token ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
-        const response = await request.json();
-        dispatch(logIn(response));
-      }
-    };
-    log();
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLogged]);
 
   return (
     <div className={styles.articlesList}>

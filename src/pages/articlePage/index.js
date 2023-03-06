@@ -1,13 +1,15 @@
 import { Spin } from 'antd';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
 import Tag from '../../components/Tag';
+import DeleteModal from '../../components/deleteModal';
 import ErrorIndicator from '../../components/ErrorIndicator';
 import { fetchArticle } from '../../store/slices/articlesSlice';
 import formatDate from '../../helpers/dateFormatter';
+import Like from '../../components/like';
 
 import styles from './articlePage.module.scss';
 
@@ -16,12 +18,18 @@ function ArticlePage() {
   const article = useSelector((state) => state.articlesReducer.currentArticle.article);
   const status = useSelector((state) => state.articlesReducer.articleStatus);
   const error = useSelector((state) => state.articlesReducer.articleError);
+  const isLogged = useSelector((state) => state.userReducer.isLoggedIn);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchArticle(params.slug));
   }, [dispatch, params.slug]);
+
+  const onCloseModal = () => {
+    setModalVisible(false);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -40,13 +48,11 @@ function ArticlePage() {
             <div className={styles.leftColumn}>
               <div className={styles.topRow}>
                 <h2 className={styles.title}>{article.title}</h2>
-                <button className={styles.likeBtn}>
-                  <img
-                    src="/img/unliked.svg"
-                    alt="like"
-                  />
-                  {article.favoritesCount}
-                </button>
+                <Like
+                  isLiked={article.favorited}
+                  likes={article.favoritesCount}
+                  slug={article.slug}
+                />
               </div>
               <div className={styles.tags}>
                 {article.tagList.map((tag) => (
@@ -66,7 +72,23 @@ function ArticlePage() {
               />
             </div>
           </div>
-          <div className={styles.description}>{article.description || 'No descriotion available'}</div>
+          <div className={styles.subheader}>
+            <div className={styles.description}>{article.description || 'No descriotion available'}</div>
+            {isLogged ? (
+              <div className={styles.controlBlock}>
+                <button
+                  className={styles.deleteBtn}
+                  onClick={() => setModalVisible(true)}
+                >
+                  Delete
+                </button>
+                {modalVisible ? <DeleteModal onCloseModal={onCloseModal} /> : null}
+                <Link to={`/articles/${article.slug}/edit`}>
+                  <button className={styles.editBtn}>Edit</button>
+                </Link>
+              </div>
+            ) : null}
+          </div>
           <div className={styles.body}>
             <ReactMarkdown>{article.body}</ReactMarkdown>
           </div>

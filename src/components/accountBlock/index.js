@@ -12,7 +12,12 @@ function AccountBlock() {
   const navigate = useNavigate();
   return (
     <div className={styles.accountBlock}>
-      <button className={styles.articleBtn}>Create article</button>
+      <Link
+        to="/new-article"
+        className={styles.articleBtn}
+      >
+        Create article
+      </Link>
       <div className={styles.userBlock}>
         <Link to="/profile">
           <span className={styles.userName}>{userName}</span>

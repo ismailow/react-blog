@@ -11,13 +11,26 @@ const initialState = {
 };
 
 export const fetchArticles = createAsyncThunk('articles/fetchArticles', async (page) => {
-  const res = await fetch(`https://blog.kata.academy/api/articles?offset=${page || 0}`);
+  console.log('fetching');
+  const token = localStorage.getItem('token');
+  const res = await fetch(`https://blog.kata.academy/api/articles?offset=${page || 0}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  });
   const data = await res.json();
   return data;
 });
 
 export const fetchArticle = createAsyncThunk('articles/fetchArticle', async (slug) => {
-  const res = await fetch(`https://blog.kata.academy/api/articles/${slug}`);
+  const token = localStorage.getItem('token');
+  const res = await fetch(`https://blog.kata.academy/api/articles/${slug}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  });
   const data = await res.json();
   return data;
 });
@@ -34,6 +47,7 @@ export const articlesSlice = createSlice({
     [fetchArticles.fulfilled]: (state, action) => {
       state.status = 'resolved';
       state.articles = action.payload;
+      console.log('action fulfilled');
       if (action.payload.errors) {
         state.error = true;
       }
@@ -47,6 +61,7 @@ export const articlesSlice = createSlice({
       state.currentArticle = action.payload;
       if (action.payload.errors) {
         state.articleError = true;
+        state.articleStatus = 'rejected';
       }
     },
     [fetchArticle.rejected]: (state) => {
