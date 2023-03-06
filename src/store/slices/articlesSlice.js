@@ -11,7 +11,6 @@ const initialState = {
 };
 
 export const fetchArticles = createAsyncThunk('articles/fetchArticles', async (page) => {
-  console.log('fetching');
   const token = localStorage.getItem('token');
   const res = await fetch(`https://blog.kata.academy/api/articles?offset=${page || 0}`, {
     method: 'GET',
@@ -47,7 +46,6 @@ export const articlesSlice = createSlice({
     [fetchArticles.fulfilled]: (state, action) => {
       state.status = 'resolved';
       state.articles = action.payload;
-      console.log('action fulfilled');
       if (action.payload.errors) {
         state.error = true;
       }
