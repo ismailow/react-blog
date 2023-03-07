@@ -19,9 +19,12 @@ function ArticlePage() {
   const status = useSelector((state) => state.articlesReducer.articleStatus);
   const error = useSelector((state) => state.articlesReducer.articleError);
   const isLogged = useSelector((state) => state.userReducer.isLoggedIn);
+  const userName = useSelector((state) => state.userReducer.userName);
   const [modalVisible, setModalVisible] = useState(false);
 
   const dispatch = useDispatch();
+
+  console.log(article);
 
   useEffect(() => {
     dispatch(fetchArticle(params.slug));
@@ -74,7 +77,7 @@ function ArticlePage() {
           </div>
           <div className={styles.subheader}>
             <div className={styles.description}>{article.description || 'No descriotion available'}</div>
-            {isLogged ? (
+            {isLogged && userName === article.author.username ? (
               <div className={styles.controlBlock}>
                 <button
                   className={styles.deleteBtn}
