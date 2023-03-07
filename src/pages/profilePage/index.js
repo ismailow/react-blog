@@ -5,32 +5,8 @@ import { useForm } from 'react-hook-form';
 
 import { update } from '../../store/slices/userSlice';
 import styles from '../../styles/form.module.scss';
-
-const emailSchema = {
-  pattern: {
-    value: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
-    message: 'Email must be valid',
-  },
-};
-
-const passwordSchema = {
-  minLength: {
-    value: 6,
-    message: 'Password must be 6 characters or more',
-  },
-  maxLength: {
-    value: 40,
-    message: 'Password must be 40 characters or less',
-  },
-};
-
-const urlSchema = {
-  pattern: {
-    value:
-      /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/,
-    message: 'URL must be valid',
-  },
-};
+import baseURL from '../../vars';
+import { emailSchema, passwordSchema, urlSchema } from '../../validationSchemas';
 
 function ProfilePage() {
   const isLogged = useSelector((state) => state.userReducer.isLoggedIn);
@@ -75,7 +51,7 @@ function ProfilePage() {
         requestBody.user[key] = data[key];
       }
     });
-    const request = await fetch('https://blog.kata.academy/api/user', {
+    const request = await fetch(`${baseURL}/user`, {
       method: 'PUT',
       body: JSON.stringify(requestBody),
       headers: {

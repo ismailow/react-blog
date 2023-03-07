@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import ArticleForm from '../../components/articleForm';
+import baseURL from '../../vars';
 
 function EditingPage() {
   const slug = useSelector((state) => state.articlesReducer.currentArticle.article.slug);
@@ -17,7 +18,7 @@ function EditingPage() {
         tagList,
       },
     };
-    const request = await fetch(`https://blog.kata.academy/api/articles/${slug}`, {
+    const request = await fetch(`${baseURL}/${slug}`, {
       method: 'PUT',
       body: JSON.stringify(requestBody),
       headers: {

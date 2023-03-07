@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import baseURL from '../../vars';
+
 import styles from './like.module.scss';
 
 function Like({ isLiked, likes, slug }) {
@@ -16,7 +18,7 @@ function Like({ isLiked, likes, slug }) {
       navigate('/sign-in');
     }
     if (!like) {
-      const request = await fetch(`https://blog.kata.academy/api/articles/${slug}/favorite`, {
+      const request = await fetch(`${baseURL}/${slug}/favorite`, {
         method: 'POST',
         headers: {
           Authorization: `Token ${token}`,
@@ -28,7 +30,7 @@ function Like({ isLiked, likes, slug }) {
         setLikesCounter(Number(likesCounter) + 1);
       }
     } else {
-      const request = await fetch(`https://blog.kata.academy/api/articles/${slug}/favorite`, {
+      const request = await fetch(`${baseURL}/${slug}/favorite`, {
         method: 'DELETE',
         headers: {
           Authorization: `Token ${token}`,

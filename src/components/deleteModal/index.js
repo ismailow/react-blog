@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import baseURL from '../../vars';
+
 import styles from './deleteModal.module.scss';
 
 function DeleteModal({ onCloseModal }) {
@@ -9,7 +11,7 @@ function DeleteModal({ onCloseModal }) {
   const token = useSelector((state) => state.userReducer.token);
 
   const onDelete = async () => {
-    const request = await fetch(`https://blog.kata.academy/api/articles/${params.slug}`, {
+    const request = await fetch(`${baseURL}/${params.slug}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Token ${token}`,

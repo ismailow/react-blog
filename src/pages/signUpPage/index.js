@@ -6,55 +6,13 @@ import { useDispatch } from 'react-redux';
 
 import { logIn } from '../../store/slices/userSlice';
 import styles from '../../styles/form.module.scss';
-
-const userNameSchema = {
-  required: {
-    value: true,
-    message: 'The field is required',
-  },
-  minLength: {
-    value: 3,
-    message: 'Username must be 3 characters or more',
-  },
-  maxLength: {
-    value: 20,
-    message: 'Username must be 20 characters or less',
-  },
-};
-
-const emailSchema = {
-  required: {
-    value: true,
-    message: 'The field is required',
-  },
-  pattern: {
-    value: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
-    message: 'Email must be valid',
-  },
-};
-
-const passwordSchema = {
-  required: {
-    value: true,
-    message: 'The field is required',
-  },
-  minLength: {
-    value: 6,
-    message: 'Password must be 6 characters or more',
-  },
-  maxLength: {
-    value: 40,
-    message: 'Password must be 40 characters or less',
-  },
-};
-
-const confirmPasswordSchema = {
-  required: {
-    value: true,
-    message: 'The field is required',
-  },
-  validate: (value, formValues) => value === formValues.password || 'Passwords must match',
-};
+import baseURL from '../../vars';
+import {
+  signInEmailSchema,
+  userNameSchema,
+  signUpPasswordSchema,
+  confirmPasswordSchema,
+} from '../../validationSchemas';
 
 function SignUpPage() {
   const submitRef = useRef();
@@ -80,7 +38,7 @@ function SignUpPage() {
       },
     };
 
-    const request = await fetch('https://blog.kata.academy/api/users', {
+    const request = await fetch(`${baseURL}/users`, {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
@@ -123,7 +81,7 @@ function SignUpPage() {
         <input
           type="email"
           placeholder="Email address"
-          {...register('email', emailSchema)}
+          {...register('email', signInEmailSchema)}
           name="email"
           className={errors.email ? styles.error : null}
         />
@@ -133,7 +91,7 @@ function SignUpPage() {
           type="password"
           placeholder="Password"
           name="password"
-          {...register('password', passwordSchema)}
+          {...register('password', signUpPasswordSchema)}
           className={errors.password ? styles.error : null}
         />
         {errors?.password && <p className={styles.errorMessage}>{errors?.password?.message || 'Error!'}</p>}

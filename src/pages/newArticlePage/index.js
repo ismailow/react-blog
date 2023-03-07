@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import ArticleForm from '../../components/articleForm';
+import baseURL from '../../vars';
 
 function NewArticlePage() {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ function NewArticlePage() {
         tagList,
       },
     };
-    const request = await fetch('https://blog.kata.academy/api/articles', {
+    const request = await fetch(`${baseURL}/articles`, {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {

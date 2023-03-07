@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import LogBlock from '../logBlock';
 import AccountBlock from '../accountBlock';
 import { logIn } from '../../store/slices/userSlice';
+import baseURL from '../../vars';
 
 import styles from './header.module.scss';
 
@@ -14,7 +15,7 @@ function Header() {
   useEffect(() => {
     const log = async () => {
       if (localStorage.token) {
-        const request = await fetch('https://blog.kata.academy/api/user', {
+        const request = await fetch(`${baseURL}/user`, {
           method: 'GET',
           headers: {
             Authorization: `Token ${token}`,

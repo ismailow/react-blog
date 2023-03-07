@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+import baseURL from '../../vars';
+
 const initialState = {
   articles: [],
   status: null,
@@ -12,7 +14,7 @@ const initialState = {
 
 export const fetchArticles = createAsyncThunk('articles/fetchArticles', async (page) => {
   const token = localStorage.getItem('token');
-  const res = await fetch(`https://blog.kata.academy/api/articles?offset=${page || 0}`, {
+  const res = await fetch(`${baseURL}/articles?offset=${page || 0}`, {
     method: 'GET',
     headers: {
       Authorization: `Token ${token}`,
@@ -24,7 +26,7 @@ export const fetchArticles = createAsyncThunk('articles/fetchArticles', async (p
 
 export const fetchArticle = createAsyncThunk('articles/fetchArticle', async (slug) => {
   const token = localStorage.getItem('token');
-  const res = await fetch(`https://blog.kata.academy/api/articles/${slug}`, {
+  const res = await fetch(`${baseURL}/articles/${slug}`, {
     method: 'GET',
     headers: {
       Authorization: `Token ${token}`,
