@@ -24,8 +24,6 @@ function ArticlePage() {
 
   const dispatch = useDispatch();
 
-  console.log(article);
-
   useEffect(() => {
     dispatch(fetchArticle(params.slug));
   }, [dispatch, params.slug]);
