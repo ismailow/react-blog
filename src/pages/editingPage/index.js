@@ -27,7 +27,6 @@ function EditingPage() {
       },
     });
     const response = await request.json();
-    console.log(response);
     if (!response.errors) {
       navigate(`/article/${response.article.slug}`);
     }
