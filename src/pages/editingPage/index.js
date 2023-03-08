@@ -18,7 +18,7 @@ function EditingPage() {
         tagList,
       },
     };
-    const request = await fetch(`${baseURL}/${slug}`, {
+    const request = await fetch(`${baseURL}/articles/${slug}`, {
       method: 'PUT',
       body: JSON.stringify(requestBody),
       headers: {

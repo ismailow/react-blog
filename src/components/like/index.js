@@ -18,7 +18,7 @@ function Like({ isLiked, likes, slug }) {
       navigate('/sign-in');
     }
     if (!like) {
-      const request = await fetch(`${baseURL}/${slug}/favorite`, {
+      const request = await fetch(`${baseURL}/articles/${slug}/favorite`, {
         method: 'POST',
         headers: {
           Authorization: `Token ${token}`,
@@ -30,7 +30,7 @@ function Like({ isLiked, likes, slug }) {
         setLikesCounter(Number(likesCounter) + 1);
       }
     } else {
-      const request = await fetch(`${baseURL}/${slug}/favorite`, {
+      const request = await fetch(`${baseURL}/articles/${slug}/favorite`, {
         method: 'DELETE',
         headers: {
           Authorization: `Token ${token}`,

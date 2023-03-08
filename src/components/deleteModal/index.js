@@ -11,7 +11,7 @@ function DeleteModal({ onCloseModal }) {
   const token = useSelector((state) => state.userReducer.token);
 
   const onDelete = async () => {
-    const request = await fetch(`${baseURL}/${params.slug}`, {
+    const request = await fetch(`${baseURL}/articles/${params.slug}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Token ${token}`,
