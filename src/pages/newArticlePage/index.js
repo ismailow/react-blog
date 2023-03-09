@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 import ArticleForm from '../../components/articleForm';
 import baseURL from '../../vars';
+import * as selectors from '../../store/selectors';
 
 function NewArticlePage() {
   const navigate = useNavigate();
-  const isLogged = useSelector((state) => state.userReducer.isLoggedIn);
-  const token = useSelector((state) => state.userReducer.token);
+  const isLogged = useSelector(selectors.isLoggedIn);
+  const token = useSelector(selectors.token);
 
   const onSubmit = async (data) => {
     const tagList = data.tags.map((tag) => tag.text);

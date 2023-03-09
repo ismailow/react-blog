@@ -6,16 +6,23 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { fetchArticles } from '../../store/slices/articlesSlice';
 import Article from '../../components/article';
 import ErrorIndicator from '../../components/ErrorIndicator';
+import * as selectors from '../../store/selectors';
 
 import styles from './articles.module.scss';
 
 function ArticlesPage() {
   const params = useParams();
-  const articles = useSelector((state) => state.articlesReducer.articles.articles);
-  const status = useSelector((state) => state.articlesReducer.status);
-  const error = useSelector((state) => state.articlesReducer.error);
-  const articlesCount = useSelector((state) => state.articlesReducer.articles.articlesCount);
-  const isLogged = useSelector((state) => state.userReducer.isLoggedIn);
+  // const articles = useSelector((state) => state.articlesReducer.articles.articles);
+  // const status = useSelector((state) => state.articlesReducer.status);
+  // const error = useSelector((state) => state.articlesReducer.error);
+  // const articlesCount = useSelector((state) => state.articlesReducer.articles.articlesCount);
+  // const isLogged = useSelector((state) => state.userReducer.isLoggedIn);
+
+  const articles = useSelector(selectors.articles);
+  const status = useSelector(selectors.status);
+  const error = useSelector(selectors.error);
+  const articlesCount = useSelector(selectors.articlesCount);
+  const isLogged = useSelector(selectors.isLoggedIn);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,7 +31,7 @@ function ArticlesPage() {
     const fetchParameter = params.page === 1 ? 0 : params.page * 20 - 20;
     dispatch(fetchArticles(fetchParameter));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLogged]);
+  }, [isLogged, params]);
 
   return (
     <div className={styles.articlesList}>

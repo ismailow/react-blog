@@ -10,16 +10,19 @@ import ErrorIndicator from '../../components/ErrorIndicator';
 import { fetchArticle } from '../../store/slices/articlesSlice';
 import formatDate from '../../helpers/dateFormatter';
 import Like from '../../components/like';
+import * as selectors from '../../store/selectors';
 
 import styles from './articlePage.module.scss';
 
 function ArticlePage() {
   const params = useParams();
-  const article = useSelector((state) => state.articlesReducer.currentArticle.article);
-  const status = useSelector((state) => state.articlesReducer.articleStatus);
-  const error = useSelector((state) => state.articlesReducer.articleError);
-  const isLogged = useSelector((state) => state.userReducer.isLoggedIn);
-  const userName = useSelector((state) => state.userReducer.userName);
+
+  const article = useSelector(selectors.currentArticle);
+  const status = useSelector(selectors.articleStatus);
+  const error = useSelector(selectors.articleError);
+  const isLogged = useSelector(selectors.isLoggedIn);
+  const userName = useSelector(selectors.userName);
+
   const [modalVisible, setModalVisible] = useState(false);
 
   const dispatch = useDispatch();
@@ -35,7 +38,7 @@ function ArticlePage() {
   return (
     <div className={styles.wrapper}>
       {error ? <ErrorIndicator /> : null}
-      {status === 'loading' ? (
+      {status === 'loading' && !error ? (
         <div className={styles.loader}>
           <Spin
             size="large"

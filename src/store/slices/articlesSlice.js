@@ -61,7 +61,7 @@ export const articlesSlice = createSlice({
       state.currentArticle = action.payload;
       if (action.payload.errors) {
         state.articleError = true;
-        state.articleStatus = 'rejected';
+        state.articleStatus = null;
       }
     },
     [fetchArticle.rejected]: (state) => {

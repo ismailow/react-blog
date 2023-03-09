@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 
+import * as selectors from '../../store/selectors';
+
 import styles from './articleForm.module.scss';
 
 function ArticleForm({ isEditing, onSubmit }) {
-  const article = useSelector((state) => state.articlesReducer.currentArticle.article);
+  const article = useSelector(selectors.currentArticle);
   const {
     register,
     handleSubmit,

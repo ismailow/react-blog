@@ -7,13 +7,15 @@ import { update } from '../../store/slices/userSlice';
 import styles from '../../styles/form.module.scss';
 import baseURL from '../../vars';
 import { emailSchema, passwordSchema, urlSchema } from '../../validationSchemas';
+import * as selectors from '../../store/selectors';
 
 function ProfilePage() {
-  const isLogged = useSelector((state) => state.userReducer.isLoggedIn);
-  const userName = useSelector((state) => state.userReducer.userName);
-  const userEmail = useSelector((state) => state.userReducer.email);
-  const userAvatar = useSelector((state) => state.userReducer.avatar);
-  const token = useSelector((state) => state.userReducer.token);
+  const isLogged = useSelector(selectors.isLoggedIn);
+  const userName = useSelector(selectors.userName);
+  const userEmail = useSelector(selectors.email);
+  const userAvatar = useSelector(selectors.avatar);
+  const token = useSelector(selectors.token);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

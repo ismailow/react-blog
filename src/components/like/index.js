@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import baseURL from '../../vars';
+import * as selectors from '../../store/selectors';
 
 import styles from './like.module.scss';
 
@@ -10,7 +11,7 @@ function Like({ isLiked, likes, slug }) {
   const [like, setLike] = useState(isLiked);
   const [likesCounter, setLikesCounter] = useState(likes);
   const token = localStorage.getItem('token');
-  const isLogged = useSelector((state) => state.userReducer.isLoggedIn);
+  const isLogged = useSelector(selectors.isLoggedIn);
   const navigate = useNavigate();
 
   const onLike = async () => {

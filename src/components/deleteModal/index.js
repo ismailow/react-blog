@@ -2,13 +2,15 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import baseURL from '../../vars';
+import * as selectors from '../../store/selectors';
 
 import styles from './deleteModal.module.scss';
 
 function DeleteModal({ onCloseModal }) {
+  const token = useSelector(selectors.token);
+
   const navigate = useNavigate();
   const params = useParams();
-  const token = useSelector((state) => state.userReducer.token);
 
   const onDelete = async () => {
     const request = await fetch(`${baseURL}/articles/${params.slug}`, {

@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 
 import ArticleForm from '../../components/articleForm';
 import baseURL from '../../vars';
+import * as selectors from '../../store/selectors';
 
 function EditingPage() {
-  const slug = useSelector((state) => state.articlesReducer.currentArticle.article.slug);
+  // const slug = useSelector((state) => state.articlesReducer.currentArticle.article.slug);
+  const slug = useSelector(selectors.slug);
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
   const onSubmit = async (data) => {
