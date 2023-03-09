@@ -12,11 +12,6 @@ import styles from './articles.module.scss';
 
 function ArticlesPage() {
   const params = useParams();
-  // const articles = useSelector((state) => state.articlesReducer.articles.articles);
-  // const status = useSelector((state) => state.articlesReducer.status);
-  // const error = useSelector((state) => state.articlesReducer.error);
-  // const articlesCount = useSelector((state) => state.articlesReducer.articles.articlesCount);
-  // const isLogged = useSelector((state) => state.userReducer.isLoggedIn);
 
   const articles = useSelector(selectors.articles);
   const status = useSelector(selectors.status);

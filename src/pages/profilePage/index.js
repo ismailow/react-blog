@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { message } from 'antd';
 
 import { update } from '../../store/slices/userSlice';
 import styles from '../../styles/form.module.scss';
@@ -15,6 +16,7 @@ function ProfilePage() {
   const userEmail = useSelector(selectors.email);
   const userAvatar = useSelector(selectors.avatar);
   const token = useSelector(selectors.token);
+  const submitRef = useRef();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -40,6 +42,7 @@ function ProfilePage() {
   }, [isLogged, navigate]);
 
   const onSubmit = async (data) => {
+    submitRef.current.disabled = true;
     if (data.username === '') {
       setError('username', { type: 'custom', message: 'Username must not be empty' });
     }
@@ -66,12 +69,15 @@ function ProfilePage() {
     if (response.errors) {
       if (response.errors.username) {
         setError('username', { type: 'custom', message: 'Username already taken' });
-      }
-      if (response.errors.email) {
+      } else if (response.errors.email) {
         setError('email', { type: 'custom', message: 'Email already taken' });
+      } else {
+        message.error('Something went wrong. Try again');
       }
     } else {
       dispatch(update(response));
+      submitRef.current.disabled = false;
+      message.success('Succes');
     }
   };
 
@@ -116,6 +122,7 @@ function ProfilePage() {
         <button
           type="submit"
           disabled={!isDirty}
+          ref={submitRef}
         >
           Save
         </button>

@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { message } from 'antd';
 
 import ArticleForm from '../../components/articleForm';
 import baseURL from '../../vars';
@@ -10,8 +11,10 @@ function NewArticlePage() {
   const navigate = useNavigate();
   const isLogged = useSelector(selectors.isLoggedIn);
   const token = useSelector(selectors.token);
+  const submitRef = useRef();
 
   const onSubmit = async (data) => {
+    submitRef.current.disabled = true;
     const tagList = data.tags.map((tag) => tag.text);
     const requestBody = {
       article: {
@@ -31,7 +34,10 @@ function NewArticlePage() {
     });
     const response = await request.json();
     if (!response.errors) {
-      navigate('/');
+      navigate(`/article/${response.article.slug}`);
+    } else {
+      submitRef.current.disabled = false;
+      message.error('Something went wrong. Try again');
     }
   };
 
@@ -45,6 +51,7 @@ function NewArticlePage() {
     <ArticleForm
       isEditing={false}
       onSubmit={onSubmit}
+      submitRef={submitRef}
     />
   );
 }

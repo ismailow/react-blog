@@ -6,7 +6,7 @@ import * as selectors from '../../store/selectors';
 
 import styles from './articleForm.module.scss';
 
-function ArticleForm({ isEditing, onSubmit }) {
+function ArticleForm({ isEditing, onSubmit, submitRef }) {
   const article = useSelector(selectors.currentArticle);
   const {
     register,
@@ -107,7 +107,8 @@ function ArticleForm({ isEditing, onSubmit }) {
               >
                 <input
                   placeholder="Tag"
-                  {...register(`tags[${index}].text`, { required: { value: true, message: 'Tag is required' } })}
+                  // {...register(`tags[${index}].text`, { required: { value: true, message: 'Tag is required' } })}
+                  {...register(`tags[${index}].text`)}
                 />
                 <button
                   onClick={() => deleteTag(index)}
@@ -130,6 +131,7 @@ function ArticleForm({ isEditing, onSubmit }) {
         <button
           className={styles.submit}
           disabled={!isValid}
+          ref={submitRef}
         >
           Send
         </button>
