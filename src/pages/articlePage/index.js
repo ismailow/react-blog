@@ -71,7 +71,7 @@ function ArticlePage() {
               </div>
               <img
                 className={styles.avatar}
-                src={article.author.image}
+                src={article.author.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'}
                 alt="avatar"
               />
             </div>

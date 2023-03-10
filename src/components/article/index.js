@@ -30,7 +30,7 @@ function Article({ title, description, date, likes, isLiked, author, avatar, tag
           </div>
           <img
             className={styles.avatar}
-            src={avatar}
+            src={avatar || 'https://static.productionready.io/images/smiley-cyrus.jpg'}
             alt="avatar"
           />
         </div>
