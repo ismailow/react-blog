@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useRef } from 'react';
 
 import formatDate from '../../helpers/dateFormatter';
 import Tag from '../Tag';
@@ -7,6 +8,15 @@ import Like from '../like';
 import styles from './article.module.scss';
 
 function Article({ title, description, date, likes, isLiked, author, avatar, tags, slug }) {
+  const avatarRef = useRef();
+
+  // avatarRef.current.error = () => {
+  //   avatarRef.current.src = 'https://static.productionready.io/images/smiley-cyrus.jpg';
+  //   // console.log(avatarRef.current);
+  // };
+
+  // console.log(avatarRef.current);
+
   return (
     <div className={styles.article}>
       <div className={styles.header}>
@@ -32,6 +42,10 @@ function Article({ title, description, date, likes, isLiked, author, avatar, tag
             className={styles.avatar}
             src={avatar || 'https://static.productionready.io/images/smiley-cyrus.jpg'}
             alt="avatar"
+            ref={avatarRef}
+            onError={(e) => {
+              e.target.src = 'https://static.productionready.io/images/smiley-cyrus.jpg';
+            }}
           />
         </div>
       </div>

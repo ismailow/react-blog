@@ -73,6 +73,9 @@ function ArticlePage() {
                 className={styles.avatar}
                 src={article.author.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'}
                 alt="avatar"
+                onError={(e) => {
+                  e.target.src = 'https://static.productionready.io/images/smiley-cyrus.jpg';
+                }}
               />
             </div>
           </div>
