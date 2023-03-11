@@ -80,6 +80,9 @@
     padding: 8px 36px;
     cursor: pointer;
   }
+  .errorMessage {
+    margin: 0;
+  }
 }
 
 .title {
@@ -112,5 +115,5 @@
 .errorMessage {
   color: #F5222D;
   margin: 0;
-  // margin-top: -21px;
+  margin-top: -21px;
 }

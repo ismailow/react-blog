@@ -10,12 +10,7 @@ import styles from './article.module.scss';
 function Article({ title, description, date, likes, isLiked, author, avatar, tags, slug }) {
   const avatarRef = useRef();
 
-  // avatarRef.current.error = () => {
-  //   avatarRef.current.src = 'https://static.productionready.io/images/smiley-cyrus.jpg';
-  //   // console.log(avatarRef.current);
-  // };
-
-  // console.log(avatarRef.current);
+  console.log(tags);
 
   return (
     <div className={styles.article}>

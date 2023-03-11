@@ -74,19 +74,25 @@ function ArticleForm({ isEditing, onSubmit, submitRef }) {
           Title
           <input
             placeholder="Title"
-            {...register('title', { required: true })}
+            {...register('title', {
+              required: { value: true, message: 'Title is required' },
+              maxLength: { value: 100, message: 'Maximum title length 100 characters' },
+            })}
             {...titleValue}
           />
-          {errors?.title && <p className={styles.errorMessage}>Title is required</p>}
+          {errors?.title && <p className={styles.errorMessage}>{errors.title.message}</p>}
         </label>
         <label>
           Short description
           <input
             placeholder="Description"
-            {...register('description', { required: true })}
+            {...register('description', {
+              required: { value: true, message: 'Title is required' },
+              maxLength: { value: 100, message: 'Maximum description length 100 characters' },
+            })}
             {...descriptionValue}
           />
-          {errors?.description && <p className={styles.errorMessage}>Description is required</p>}
+          {errors?.description && <p className={styles.errorMessage}>{errors.description.message}</p>}
         </label>
         <label>
           Text
@@ -108,7 +114,9 @@ function ArticleForm({ isEditing, onSubmit, submitRef }) {
                 <input
                   placeholder="Tag"
                   // {...register(`tags[${index}].text`, { required: { value: true, message: 'Tag is required' } })}
-                  {...register(`tags[${index}].text`)}
+                  {...register(`tags[${index}].text`, {
+                    maxLength: { value: 50, message: 'Maximum tag length 50 characters' },
+                  })}
                 />
                 <button
                   onClick={() => deleteTag(index)}
@@ -116,7 +124,7 @@ function ArticleForm({ isEditing, onSubmit, submitRef }) {
                 >
                   Delete
                 </button>
-                {errors?.tags?.[index] && <p className={styles.errorMessage}>Tag is required</p>}
+                {errors?.tags?.[index] && <p className={styles.errorMessage}>{errors.tags[index].text.message}</p>}
               </div>
             ))}
           </div>

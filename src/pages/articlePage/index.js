@@ -59,9 +59,7 @@ function ArticlePage() {
                 />
               </div>
               <div className={styles.tags}>
-                {article.tagList.map((tag) => (
-                  <Tag text={tag} />
-                ))}
+                {article.tagList.map((tag) => (tag !== '' ? <Tag text={tag} /> : null))}
               </div>
             </div>
             <div className={styles.authorBlock}>
