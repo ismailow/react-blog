@@ -1,0 +1,13 @@
+.block {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  h1 {
+    font-size: 70px;
+  }
+  p {
+    font-size: 30px;
+  }
+}

@@ -10,8 +10,6 @@ import styles from './article.module.scss';
 function Article({ title, description, date, likes, isLiked, author, avatar, tags, slug }) {
   const avatarRef = useRef();
 
-  console.log(tags);
-
   return (
     <div className={styles.article}>
       <div className={styles.header}>
